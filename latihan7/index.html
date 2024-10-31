@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h6>Event</h6>
+    <button onclick="klikKlakKlok()" id="tralala"> klik tombol ini</button>
+    <button onclick="hide()">Hide image</button>
+    <img src="https://gratisography.com/wp-content/uploads/2024/10/gratisography-cool-cat-800x525.jpg" alt=""
+        id="tralala2">
+
+    <h1 id="displayName"></h1>
+    <h1 id="displayEdu"></h1>
+    <h1 id="displayGender"></h1>
+    <form id="submitForm">
+        <div>
+            <label for="name">Name</label>
+            <input type="text" id="inputName" name="name">
+        </div>
+        <div>
+            <label for="selectEdu">Pendidikan</label>
+            <select name="selectEdu" id="selectEdu">
+                <option value="sd">SD</option>
+                <option value="smp">SMP</option>
+                <option value="sma">SMA</option>
+            </select>
+        </div>
+        <div>
+            
+            <label >Gender</label>
+            <input type="radio" name="gender" value="male"/>
+            <label >male</label>
+            <input type="radio" name="gender" value="female"/>
+            <label >female</label>
+        <button type="submit">SUBMIT</button>
+    </form>
+    <script src="script.js"></script>
+</body>
+
+</html>
