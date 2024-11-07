@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h1>Fintech Transaction Management</h1>
+    <h4 id="welcome-sign"></h4>
+    <div id="login-tralala">
+        <form action="" id="login-tralala-submit">
+            <label for="username">Enter Username</label>
+            <input type="text" id="username">
+            <button id="login-btn">Login</button>
+        </form>
+    </div>
+    <div id="transaksi-tralala" style="display: none;">
+        <h2>Daftar Transaksi</h2>
+        <ol id="transaction-list">
+
+        </ol>
+
+        <form action="" id="transaction-tralala-form">
+            <label for="amount">Transaction Amount</label>
+            <input type="number" id="amount">
+            <button id="add-transaction-btn">Add Transaction</button>
+        </form>
+    </div>
+    <button id="logout-btn" style="display: none;">Logout</button>
+    <script>
+        const loginTralala = document.getElementById("login-tralala");
+        const loginTralalaSubmit = document.getElementById("login-tralala-submit");
+        const transaksiTralala = document.getElementById("transaksi-tralala");
+        const transaksiTralalaForm = document.getElementById("transaction-tralala-form");
+        const logoutBtn = document.getElementById("logout-btn");
+        const welcomeSign = document.getElementById("welcome-sign");
+
+        if (sessionStorage.getItem("username")) {
+            loginTralala.style.display = "none";
+            transaksiTralala.style.display = "block";
+            welcomeSign.innerHTML = `<h4>Welcome ${sessionStorage.getItem("username")}</h4>`;
+            logoutBtn.style.display = "block";
+            renderTransaction();
+        }
+        
+        loginTralalaSubmit.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            sessionStorage.setItem("username", username);
+            loginTralala.style.display = "none";
+            transaksiTralala.style.display = "block";
+            welcomeSign.innerHTML = `<h4>Welcome ${sessionStorage.getItem("username")}</h4>`;
+            logoutBtn.style.display = "block";
+            renderTransaction();
+        });
+        logoutBtn.addEventListener("click", () => {
+            sessionStorage.removeItem("username");
+            loginTralala.style.display = "block";
+            transaksiTralala.style.display = "none";
+            logoutBtn.style.display = "none";
+            welcomeSign.innerHTML = "";
+        });
+        transaksiTralalaForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const amount = document.getElementById("amount").value;
+            const transactionList = JSON.parse(localStorage.getItem("transactionList")) || [];
+            transactionList.push({
+                id: transactionList.length + 1,
+                amount: amount,
+                status: "Pending"
+            });
+            localStorage.setItem("transactionList", JSON.stringify(transactionList));
+            renderTransaction();
+        });
+        function renderTransaction() {
+            const transactionList = JSON.parse(localStorage.getItem("transactionList")) || [];
+            const transactionListElement = document.getElementById("transaction-list");
+            transactionListElement.innerHTML = "";
+            transactionList.forEach((transaction) => {
+                const li = document.createElement("li");
+                li.textContent = `ID : ${transaction.id}, Jumlah: ${transaction.amount}, Status: ${transaction.status}`;
+                transactionListElement.appendChild(li);
+            });
+        }
+
+
+    </script>
+</body>
+
+</html>
